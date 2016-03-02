@@ -1,0 +1,24 @@
+{
+  "name": "darstat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "darstat.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/finnjordal/darstat.git"
+  },
+  "author": "Finn Jordal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/finnjordal/darstat/issues"
+  },
+  "homepage": "https://github.com/finnjordal/darstat",
+  "dependencies": {
+    "commander": "^2.9.0",
+    "moment": "^2.11.2",
+    "request-promise": "^2.0.1"
+  }
+}
