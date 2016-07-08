@@ -61,8 +61,6 @@ if (program.døgn) {
 		program.outputHelp();		
 		process.exit(1);
 	}
-	fra= moment({year: år, month: 0, day: 1, hour: 0, minute: 0, second: 0, millisecond: 0});;
-	til= moment({year: år+1, month: 0, day: 1, hour: 0, minute: 0, second: 0, millisecond: 0});; 
 }
 
 console.log('antal døgn: %d', antaldøgn);
