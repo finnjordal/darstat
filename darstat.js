@@ -2,14 +2,17 @@
 var program = require('commander')
 	,rp = require('request-promise')
 	,moment = require('moment');
- 
+
+function range(val) {
+  return val.split('..').map(Number);
+} 
 
 program
   .version('0.0.1')
   .usage('[options]')
   .option('-d, --døgn [antal]', 'seneste døgn (default: 1)')
-  .option('-å, --år [årstal]ß', 'ønskede år')
-  .option('-æ, --ændret', 'ændrede')
+  .option('-å, --år [årstal]', 'ønskede år')
+  .option('-p, --periode <fra>..<til>', 'datoperiode (Eksempel: 20150101..20150115)',range)
   .option('-s, --slet', 'slettede')
   .parse(process.argv);
 
@@ -37,9 +40,32 @@ if (program.døgn) {
 	}
 	fra= moment({year: år, month: 1, day: 1, hour: 0, minute: 0, second: 0, millisecond: 0});;
 	til= moment({year: år+1, month: 1, day: 1, hour: 0, minute: 0, second: 0, millisecond: 0});; 
+} else if (program.periode) {
+	
+	fra= moment(program.periode[0],'YYYYMMDD');
+	if (!fra.isValid()) {
+		console.log('%s er ikke en gyldig dato',program.periode[0]);
+		program.outputHelp();		
+		process.exit(1);
+	}
+
+	til= moment(program.periode[1],'YYYYMMDD');
+	if (!til.isValid()) {
+		console.log('%s er ikke en gyldig dato',program.periode[1]);
+		program.outputHelp();		
+		process.exit(1);
+	}
+	til= til.add({days: 1});
+
+	if (!fra.isBefore(til)) {
+		program.outputHelp();		
+		process.exit(1);
+	}
 }
 
 console.log('antal døgn: %d', antaldøgn);
+
+console.log('Periode: %s - %s',fra.utc().toISOString(), til.utc().toISOString());
 
 var vejoption= {};
     vejoption.baseUrl= host;
