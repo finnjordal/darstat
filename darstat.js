@@ -17,11 +17,16 @@ program
   .option('-å, --år [årstal]', 'ønskede år')
   .option('-p, --periode <fra>..<til>', 'datoperiode (Eksempel: 20150101..20150115)',range)
   .option('-s, --slet', 'slettede')
+  .option('-m, --miljø [miljø]', 'DAWA miljø. Feks. dawa-p2')  
   .parse(process.argv);
 
 moment.locale('da');
 
 var host= "http://dawa.aws.dk";
+let miljø= program.miljø;
+if (miljø) {
+	host= host.replace('dawa',miljø); 
+} 
 
 var antaldøgn= 1;
 var fra= moment(new Date()).subtract({days: antaldøgn});
