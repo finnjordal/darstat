@@ -76,6 +76,13 @@ if (program.døgn) {
 
 console.log('Periode: %s - %s',fra.utc().toISOString(), til.utc().toISOString());
 
+var navngivenvejoption= {};
+    navngivenvejoption.baseUrl= host;
+    navngivenvejoption.url='replikering/haendelser';
+    navngivenvejoption.qs= {entitet: 'dar_navngivenvej_aktuel', tidspunktfra: fra.utc().toISOString(), tidspunkttil: til.utc().toISOString()};
+var navngivenvejrequest= request(navngivenvejoption);
+//console.log('uri: ' + vejrequest.uri.href);
+
 var vejoption= {};
     vejoption.baseUrl= host;
     vejoption.url='/replikering/vejstykker/haendelser';
@@ -166,6 +173,7 @@ function analyse(navn) {
 //-----------------------------------------------------------------------------------------------------------------
 // pipes
 //
+navngivenvejrequest.pipe(jsonparser('Navngivne veje')).pipe(analyse('Navngivne veje')).pipe(process.stdout);
 vejrequest.pipe(jsonparser('Vejstykker')).pipe(analyse('Vejstykker')).pipe(process.stdout);
 adresserequest.pipe(jsonparser('Adresser')).pipe(analyse('Adresse')).pipe(process.stdout);
 adgangsadresserequest.pipe(jsonparser('Adgangsadresser')).pipe(analyse('Adgangsadresser')).pipe(process.stdout);
