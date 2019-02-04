@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 
 var program = require('commander')
 //	,rp = require('request-promise')
