@@ -17,7 +17,6 @@ program
   .option('-d, --døgn [antal]', 'seneste døgn (default: 1)')
   .option('-å, --år [årstal]', 'ønskede år')
   .option('-p, --periode <fra>..<til>', 'datoperiode (Eksempel: 20150101..20150115)',range)
-  .option('-s, --slet', 'slettede')
   .option('-m, --miljø [miljø]', 'DAWA miljø. Feks. dawa-p2')  
   .parse(process.argv);
 
